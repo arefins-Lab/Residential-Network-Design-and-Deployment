@@ -1,4 +1,5 @@
-Residential Network Design and Deployment
+Residential Network Design and Deployment:
+
 📌 Project Overview
 This project involved designing and implementing a centralised residential network for a multi‑story property. The objectives were:
 
