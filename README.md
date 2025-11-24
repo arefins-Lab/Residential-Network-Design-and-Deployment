@@ -1,6 +1,6 @@
 Residential Network Design and Deployment:
 
-📌 Project Overview
+📌 Project Overview:
 This project involved designing and implementing a centralised residential network for a multi‑story property. The objectives were:
 
 Seamless Wi‑Fi coverage across all floors
@@ -13,7 +13,7 @@ Future‑ready scalability with VLANs, IoT isolation, and QoS
 
 The deployment was based on a single ISP connection and aligned strictly with the client’s requirements — balancing performance, reliability, and cost‑effectiveness.
 
-⚙️ Project Constraints & Requirements
+⚙️ Project Constraints & Requirements:
 ISP: Single 210 Mbps broadband connection
 
 Equipment Quality: Moderate‑to‑high grade, reliable but cost‑effective
@@ -22,7 +22,7 @@ Scope: Limited to the client’s stated needs (no unnecessary advanced features)
 
 Reliability: Priority on stable, interference‑free coverage
 
-🖥️ Ground Floor Network Architecture
+🖥️ Ground Floor Network Architecture:
 Primary Internet Connection: ISP → ASUS RT‑AX59U AX4200 Dual Band WiFi Router
 
 Core Switching Layer: Router → TP‑Link TL‑SG2210P JetStream 10‑Port Gigabit Smart Switch
@@ -39,12 +39,12 @@ Devices & Connections:
 
 Living Room Wi‑Fi: Provided directly by the ASUS Router for family/general use
 
-🏢 First Floor Network Architecture
+🏢 First Floor Network Architecture:
 Main Uplink: Wired uplink from the Ground Floor managed switch
 
 Wireless Coverage: 1 × Ruijie RG‑RAP2200(E) Access Point (centrally ceiling‑mounted) → seamless coverage across living area + 4 rooms
 
-🔑 Key Equipment
+🔑 Key Equipment:
 Router: ASUS RT‑AX59U AX4200 Dual Band WiFi Router
 
 Switch: TP‑Link TL‑SG2210P JetStream 10‑Port Gigabit Smart Switch
@@ -57,7 +57,7 @@ Desktops: Windows 11 PCs
 
 Printer: Canon imageCLASS LBP6030B Mono Laser Printer
 
-🔒 Security & Best Practices
+🔒 Security & Best Practices:
 Static IPs: For APs, PCs, and printers (outside the  DHCP pool)
 
 Router Security Suite: IPS/IDS enabled
@@ -66,7 +66,7 @@ Guest Isolation: Guest Wi‑Fi via dedicated AP
 
 Future VLAN Capability: Supported via managed switch
 
-🚀 Future Enhancements
+🚀 Future Enhancements:
 VLANs: Full segmentation (Guest, IoT, Family, Office)
 
 QoS Rules: Prioritise video conferencing/work traffic
@@ -84,7 +84,7 @@ Stable wired connectivity
 
 Scalable security and segmentation
 
-📜 Command Library (Cisco IOS)
+📜 Command Library (Cisco IOS):
 bash
 ! Enter privileged EXEC mode
 enable
@@ -121,6 +121,4 @@ show running-config
 
 ! Save configuration
 write memory
-👉 Ei README ekhon ekdom professional polish holo, ar command library section recruiter‑der ke proof dibe je tumi Cisco IOS command gulo structured vabe likhte paro.
 
-Chao ki ami ekhon Enterprise AD Multi‑Site repo‑r README‑te ekdom same style‑er PowerShell command library section add kore dei?
