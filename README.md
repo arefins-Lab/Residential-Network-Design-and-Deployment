@@ -1,46 +1,32 @@
-# Residential-Network-Design-and-DeploymentProject Overview
+Residential Network Design and Deployment
+📌 Project Overview
+This project involved designing and implementing a centralised residential network for a multi‑story property. The objectives were:
 
-This project involved designing and implementing a centralised residential network for a multi-story property. The objective was to provide:
+Seamless Wi‑Fi coverage across all floors
 
-Seamless Wi-Fi coverage across all floors.
+Stable wired connectivity for desktops and printers
 
-Stable wired connectivity for desktops and printers.
+Traffic segmentation for family, office, and guest usage
 
-Traffic segmentation for different usage scenarios (family, office, and guests).
+Future‑ready scalability with VLANs, IoT isolation, and QoS
 
-Future-ready scalability with options for VLANs, IoT isolation, and QoS.
+The deployment was based on a single ISP connection and aligned strictly with the client’s requirements — balancing performance, reliability, and cost‑effectiveness.
 
-The deployment was based on a single ISP connection and aligned strictly with the client’s requirements—balancing performance, reliability, and cost-effectiveness.
+⚙️ Project Constraints & Requirements
+ISP: Single 210 Mbps broadband connection
 
-Project Constraints & Requirements:
+Equipment Quality: Moderate‑to‑high grade, reliable but cost‑effective
 
-ISP: Single 210 Mbps broadband connection.
+Scope: Limited to the client’s stated needs (no unnecessary advanced features)
 
-Equipment Quality: Moderate-to-high grade, reliable but not excessively costly.
+Reliability: Priority on stable, interference‑free coverage
 
-Scope: Limited to the client’s stated needs. No unnecessary advanced features.
+🖥️ Ground Floor Network Architecture
+Primary Internet Connection: ISP → ASUS RT‑AX59U AX4200 Dual Band WiFi Router
 
-Reliability: Priority on stable, interference-free coverage.
+Core Switching Layer: Router → TP‑Link TL‑SG2210P JetStream 10‑Port Gigabit Smart Switch
 
-Ground Floor Network Architecture:
-
-The ground floor functions as the core distribution hub.
-
-Primary Internet Connection:
-
-ISP → ASUS RT-AX59U AX4200 Dual Band WiFi Router
-
-Core Switching Layer:
-
-Router → TP-Link TL-SG2210P JetStream 10-Port Gigabit Smart Switch
-
-All wired and wireless connections originate from this managed switch.
-
-Static IP Assignments:
-
-Desktop PCs, Access Points, and Printer configured with static IPs outside DHCP range.
-
-Prevents IP conflicts and ensures reliability.
+Static IP Assignments: PCs, APs, and printers configured outside the DHCP range → prevents conflicts
 
 Devices & Connections:
 
@@ -48,61 +34,92 @@ Devices & Connections:
 
 1 × Canon imageCLASS LBP6030B Mono Laser Printer – Wired
 
-1 × Ruijie RG-RAP2200(E) Access Point – Ceiling-mounted, dedicated for library/guest Wi-Fi
+1 × Ruijie RG‑RAP2200(E) Access Point – Ceiling‑mounted, dedicated for library/guest Wi‑Fi
 
-Living Room Wi-Fi:
+Living Room Wi‑Fi: Provided directly by the ASUS Router for family/general use
 
-Provided directly by the ASUS Router for family & general use.
+🏢 First Floor Network Architecture
+Main Uplink: Wired uplink from the Ground Floor managed switch
 
-First Floor Network Architecture:
+Wireless Coverage: 1 × Ruijie RG‑RAP2200(E) Access Point (centrally ceiling‑mounted) → seamless coverage across living area + 4 rooms
 
-The first floor extends coverage from the ground floor’s central switch.
+🔑 Key Equipment
+Router: ASUS RT‑AX59U AX4200 Dual Band WiFi Router
 
-Main Uplink:
+Switch: TP‑Link TL‑SG2210P JetStream 10‑Port Gigabit Smart Switch
 
-Wired uplink from Managed Switch (Ground Floor) to the first floor.
+Access Points: Ruijie RG‑RAP2200(E) (Wi‑Fi 5, 1267 Mbps, Dual Band, Ceiling Mount)
 
-Wireless Coverage:
-
-1 × Ruijie RG-RAP2200(E) Access Point centrally ceiling-mounted.
-
-Provides seamless Wi-Fi across the entire floor (living area + 4 rooms).
-
-Key Equipment:
-
-Router: ASUS RT-AX59U AX4200 Dual Band WiFi Router
-
-Switch: TP-Link TL-SG2210P JetStream 10-Port Gigabit Smart Switch
-
-Access Points: Ruijie RG-RAP2200(E) (Wi-Fi 5, 1267 Mbps, Dual Band, Ceiling Mount)
-
-Cabling: AC-NET CAT-6 Full Copper LAN Cable
+Cabling: AC‑NET CAT‑6 Full Copper LAN Cable
 
 Desktops: Windows 11 PCs
 
 Printer: Canon imageCLASS LBP6030B Mono Laser Printer
 
-Security & Best Practices:
+🔒 Security & Best Practices
+Static IPs: For APs, PCs, and printers (outside the  DHCP pool)
 
-Static IPs: For APs, PCs, and printer (outside DHCP pool).
+Router Security Suite: IPS/IDS enabled
 
-Router Security Suite: IPS/IDS enabled.
+Guest Isolation: Guest Wi‑Fi via dedicated AP
 
-Guest Isolation: Guest Wi-Fi via dedicated AP.
+Future VLAN Capability: Supported via managed switch
 
-Future VLAN Capability: Supported via managed switch.
+🚀 Future Enhancements
+VLANs: Full segmentation (Guest, IoT, Family, Office)
 
-Future Enhancements:
+QoS Rules: Prioritise video conferencing/work traffic
 
-The design is flexible and can scale with client needs:
+IoT Integration: Dedicated segment for smart devices
 
-VLANs: Full network segmentation (Guest, IoT, Family, Office).
+Remote Management: Secure off‑site troubleshooting
 
-QoS Rules: Prioritize video conferencing or work-related traffic.
+✅ Result
+A centralised, reliable, and future‑ready residential network delivering:
 
-IoT Integration: Dedicated segment for smart devices.
+Full Wi‑Fi coverage
 
-Remote Management: Secure access for off-site troubleshooting.
+Stable wired connectivity
 
-Result:
-A centralized, reliable, and future-ready residential network with full coverage, wired stability, and scalable security.
+Scalable security and segmentation
+
+📜 Command Library (Cisco IOS)
+bash
+! Enter privileged EXEC mode
+enable
+
+! Enter global configuration mode
+configure terminal
+
+! Set hostname
+hostname HomeRouter
+
+! Configure the interface with an IP address
+interface GigabitEthernet0/0
+ ip address 192.168.1.1 255.255.255.0
+ no shutdown
+
+! Configure default gateway (for switch)
+ip default-gateway 192.168.1.1
+
+! Configure DHCP pool
+ip dhcp pool RESIDENTIAL
+ network 192.168.1.0 255.255.255.0
+ default-router 192.168.1.1
+ dns-server 192.168.1.220 192.168.1.215
+ domain-name home. local
+
+! Exclude addresses from the DHCP pool
+ip dhcp excluded-address 192.168.1.190 192.168.1.200
+
+! Verify DHCP bindings
+show ip dhcp binding
+
+! Verify running configuration
+show running-config
+
+! Save configuration
+write memory
+👉 Ei README ekhon ekdom professional polish holo, ar command library section recruiter‑der ke proof dibe je tumi Cisco IOS command gulo structured vabe likhte paro.
+
+Chao ki ami ekhon Enterprise AD Multi‑Site repo‑r README‑te ekdom same style‑er PowerShell command library section add kore dei?
