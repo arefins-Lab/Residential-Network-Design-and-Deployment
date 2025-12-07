@@ -1,124 +1,105 @@
 Residential Network Design and Deployment:
+Project Overview:
+This project delivers a centralised, multi‑floor residential network architecture designed for reliability, seamless coverage, and future scalability. The solution balances performance, cost‑efficiency, and long‑term flexibility, built on a single ISP connection and aligned strictly with client requirements.
 
-📌 Project Overview:
-This project involved designing and implementing a centralised residential network for a multi‑story property. The objectives were:
-
+Core Objectives:
 Seamless Wi‑Fi coverage across all floors
-
 Stable wired connectivity for desktops and printers
+Traffic segmentation for family, office, and guest networks
+Future‑ready design supporting VLANs, IoT isolation, and QoS
 
-Traffic segmentation for family, office, and guest usage
-
-Future‑ready scalability with VLANs, IoT isolation, and QoS
-
-The deployment was based on a single ISP connection and aligned strictly with the client’s requirements — balancing performance, reliability, and cost‑effectiveness.
-
-⚙️ Project Constraints & Requirements:
+Project Constraints & Requirements:
 ISP: Single 210 Mbps broadband connection
-
-Equipment Quality: Moderate‑to‑high grade, reliable but cost‑effective
-
-Scope: Limited to the client’s stated needs (no unnecessary advanced features)
-
+Equipment: Mid‑to‑high grade, cost‑efficient hardware
+Scope: Only essential features; no unnecessary complexity
 Reliability: Priority on stable, interference‑free coverage
 
-🖥️ Ground Floor Network Architecture:
-Primary Internet Connection: ISP → ASUS RT‑AX59U AX4200 Dual Band WiFi Router
+Ground Floor Network Architecture:
+Primary Internet Path -
+ISP → ASUS RT‑AX59U AX4200 Router
 
-Core Switching Layer: Router → TP‑Link TL‑SG2210P JetStream 10‑Port Gigabit Smart Switch
+Core Switching Layer -
+Router → TP‑Link TL‑SG2210P JetStream 10‑Port Smart Switch
 
-Static IP Assignments: PCs, APs, and printers configured outside the DHCP range → prevents conflicts
+Static IP Assignments -
+APs, desktops, and printers are configured outside the DHCP pool to prevent conflicts.
 
-Devices & Connections:
+Connected Devices:
+2 × Windows 11 Desktop PCs (wired)
+1 × Canon LBP6030B Laser Printer (wired)
+1 × Ruijie RG‑RAP2200(E) AP (ceiling‑mounted for library/guest Wi‑Fi)
+Living Room Wi‑Fi: Served directly by the ASUS router
 
-2 × Desktop PCs (Windows 11) – Wired
+First Floor Network Architecture:
+Main Uplink -
+Wired uplink from the Ground Floor managed switch.
 
-1 × Canon imageCLASS LBP6030B Mono Laser Printer – Wired
+Wireless Coverage -
+1 × Ruijie RG‑RAP2200(E) AP (ceiling‑mounted)
+Provides seamless coverage across the living area + 4 rooms
 
-1 × Ruijie RG‑RAP2200(E) Access Point – Ceiling‑mounted, dedicated for library/guest Wi‑Fi
-
-Living Room Wi‑Fi: Provided directly by the ASUS Router for family/general use
-
-🏢 First Floor Network Architecture:
-Main Uplink: Wired uplink from the Ground Floor managed switch
-
-Wireless Coverage: 1 × Ruijie RG‑RAP2200(E) Access Point (centrally ceiling‑mounted) → seamless coverage across living area + 4 rooms
-
-🔑 Key Equipment:
-Router: ASUS RT‑AX59U AX4200 Dual Band WiFi Router
-
-Switch: TP‑Link TL‑SG2210P JetStream 10‑Port Gigabit Smart Switch
-
-Access Points: Ruijie RG‑RAP2200(E) (Wi‑Fi 5, 1267 Mbps, Dual Band, Ceiling Mount)
-
-Cabling: AC‑NET CAT‑6 Full Copper LAN Cable
-
+Key Equipment:
+Router: ASUS RT‑AX59U AX4200
+Switch: TP‑Link TL‑SG2210P JetStream
+Access Points: Ruijie RG‑RAP2200(E) (Wi‑Fi 5, 1267 Mbps)
+Cabling: AC‑NET CAT‑6 Full Copper
 Desktops: Windows 11 PCs
+Printer: Canon LBP6030B
 
-Printer: Canon imageCLASS LBP6030B Mono Laser Printer
+Security & Best Practices:
+Static IPs for APs, PCs, and printers
+Router IPS/IDS enabled
+Guest Wi‑Fi isolation via dedicated AP
+VLAN‑ready architecture using a managed switch
 
-🔒 Security & Best Practices:
-Static IPs: For APs, PCs, and printers (outside the  DHCP pool)
+Future Enhancements (Planned Architecture Upgrades):
+Full VLAN segmentation: Guest / IoT / Family / Office
+QoS policies: Prioritise conferencing & work traffic
+IoT network: Dedicated isolated segment
+Remote management: Secure off‑site access
+Central syslog: Logging for APs, router, and switch
+Zabbix/PRTG monitoring: Real‑time health visibility
+UPS integration: Power protection for core devices
+Mesh expansion: If future coverage demands increase
 
-Router Security Suite: IPS/IDS enabled
-
-Guest Isolation: Guest Wi‑Fi via dedicated AP
-
-Future VLAN Capability: Supported via managed switch
-
-🚀 Future Enhancements:
-VLANs: Full segmentation (Guest, IoT, Family, Office)
-
-QoS Rules: Prioritise video conferencing/work traffic
-
-IoT Integration: Dedicated segment for smart devices
-
-Remote Management: Secure off‑site troubleshooting
-
-✅ Result
-A centralised, reliable, and future‑ready residential network delivering:
-
-Full Wi‑Fi coverage
-
+Result:
+A centralised, reliable, and scalable residential network delivering:
+Full‑floor Wi‑Fi coverage
 Stable wired connectivity
+Segmentation‑ready architecture
+Security‑focused design
+Future‑proof upgrade path
 
-Scalable security and segmentation
-
-📜 Command Library (Cisco IOS):
-bash
+Cisco IOS Command Library (For Lab Simulation):
 ! Enter privileged EXEC mode
 enable
-
 ! Enter global configuration mode
 configure terminal
-
 ! Set hostname
 hostname HomeRouter
-
-! Configure the interface with an IP address
+! Configure interface IP
 interface GigabitEthernet0/0
- ip address 192.168.1.1 255.255.255.0
- no shutdown
+ip address 192.168.1.1 255.255.255.0
+no shutdown
 
 ! Configure default gateway (for switch)
 ip default-gateway 192.168.1.1
-
 ! Configure DHCP pool
 ip dhcp pool RESIDENTIAL
- network 192.168.1.0 255.255.255.0
- default-router 192.168.1.1
- dns-server 192.168.1.220 192.168.1.215
- domain-name home. local
+network 192.168.1.0 255.255.255.0
+default-router 192.168.1.1
+dns-server 192.168.1.220 192.168.1.215
+domain-name home. local
 
-! Exclude addresses from the DHCP pool
+! Exclude static IP range
 ip dhcp excluded-address 192.168.1.190 192.168.1.200
 
-! Verify DHCP bindings
+! Verification commands
 show ip dhcp binding
-
-! Verify running configuration
 show running-config
 
 ! Save configuration
 write memory
+
+
 
