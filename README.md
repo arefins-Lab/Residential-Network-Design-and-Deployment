@@ -1,4 +1,5 @@
-Residential Network Design and Deployment:
+Residential Network Design & Deployment —
+
 Project Overview:
 This project delivers a centralised, multi‑floor residential network architecture designed for reliability, seamless coverage, and future scalability. The solution balances performance, cost‑efficiency, and long‑term flexibility, built on a single ISP connection and aligned strictly with client requirements.
 
